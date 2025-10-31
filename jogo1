@@ -1,0 +1,55 @@
+import random
+
+def jogar_adivinhacao():
+    """
+    Função principal do Jogo de Adivinhação com tema Halloween.
+    A bruxa guarda um número secreto em seu caldeirão.
+    """
+
+    # 1. Configuração do Jogo
+    print("🧙‍♀️ Bem-vindos à Cabana da Bruxa! 🕯️🔥")
+    print("A bruxa de Salem guardou um *Número Secreto* em seu caldeirão.")
+    print("Você tem poucas chances para descobrir, ou *UM FEITIÇO* cairá sobre você!\n")
+
+    # Gera um número secreto aleatório entre 1 e 50
+    numero_secreto = random.randint(1, 50)
+
+    # Define o número de tentativas
+    tentativas_maximas = 7
+    tentativas_restantes = tentativas_maximas
+    acertou = False
+
+    # 2. Loop Principal do Jogo
+    while tentativas_restantes > 0 and not acertou:
+        print(f"🧪 Tentativas restantes: {tentativas_restantes}")
+
+        # Leitura da entrada do usuário
+        try:
+            chute = int(input("Qual é o seu palpite entre 1 e 50? "))
+        except ValueError:
+            print("⚠️ Entrada inválida! Digite apenas números inteiros.\n")
+            continue
+
+        # 3. Validação da Entrada
+        if chute < 1 or chute > 50:
+            print("⚠️ O palpite deve estar entre 1 e 50. Preste atenção!\n")
+            continue
+
+        # 4. Verificação do Palpite
+        tentativas_restantes -= 1
+
+        if chute == numero_secreto:
+            print(f"🎉 PARABÉNS! Você quebrou o feitiço! O número era *{numero_secreto}*.")
+            acertou = True
+        elif chute > numero_secreto:
+            print("🧹 Muito Alto! O caldeirão borbulha dizendo que o número é *MENOR*.\n")
+        else:
+            print("🕸️ Muito Baixo! A fumaça do caldeirão indica que o número é *MAIOR*.\n")
+
+    # 5. Fim do Jogo
+    if not acertou:
+        print("\n💀 Suas chances acabaram! O feitiço está completo!")
+        print(f"🔮 O Número Secreto da Bruxa era *{numero_secreto}*.")
+
+if _name_ == "_main_":
+    jogar_adivinhacao()
