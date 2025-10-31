@@ -1,0 +1,136 @@
+import random
+import os
+
+def exibir_forca(erros):
+    """Desenha a forca de acordo com o número de erros."""
+    estagios = [
+        """
+        =========
+        """,
+        """
+        +
+        |
+        |
+        |
+        |
+        =========
+        """,
+        """
+        +---+
+        |   O
+        |
+        |
+        |
+        =========
+        """,
+        """
+        +---+
+        |   O
+        |   |
+        |
+        |
+        =========
+        """,
+        """
+        +---+
+        |   O
+        |  /|
+        |
+        |
+        =========
+        """,
+        """
+        +---+
+        |   O
+        |  /|\\
+        |
+        |
+        =========
+        """,
+        """
+        +---+
+        |   O
+        |  /|\\
+        |  /
+        |
+        =========
+        """,
+        """
+        +---+
+        |   O
+        |  /|\\
+        |  / \\
+        |
+        =========
+        """
+    ]
+    print(estagios[erros])
+
+def jogar_forca():
+    """Função principal do Jogo da Forca com tema Halloween."""
+
+    # Limpar tela (funciona em Windows, Linux e macOS)
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+    print("🕸️ Bem-vindos à Forca Assustadora! 💀")
+    print("Adivinhe o nome de um ser ou objeto de Halloween antes que o *FANTASMA* se complete!\n")
+
+    # 1. Configuração (Lista de Palavras e Sorteio)
+    palavras_halloween = ["ABOBORA", "VAMPIRO", "BRUXA", "ZUMBI", "CALDEIRAO", "MORCEGO", "FANTASMA", "CEMITERIO"]
+    palavra_secreta = random.choice(palavras_halloween)
+
+    # 2. Variáveis de Controle
+    letras_certas = []
+    letras_erradas = []
+    max_erros = 6
+    erros = 0
+
+    # 3. Loop Principal
+    while erros < max_erros:
+        exibir_forca(erros)
+
+        # Constrói a palavra atual
+        palavra_atual = ""
+        for letra in palavra_secreta:
+            if letra in letras_certas:
+                palavra_atual += letra + " "
+            else:
+                palavra_atual += "_ "
+
+        print(f"🧩 Palavra: {palavra_atual}")
+        print(f"❌ Erros: ({erros}/{max_erros})")
+        print(f"🔤 Letras erradas: {', '.join(letras_erradas)}\n")
+
+        # Verifica se o jogador venceu
+        if "_" not in palavra_atual:
+            print(f"🎃 VITÓRIA! A palavra era: *{palavra_secreta}*")
+            return
+
+        # Entrada do Usuário
+        tentativa = input("Chute uma letra: ").strip().upper()
+
+        # Validação da entrada
+        if len(tentativa) != 1 or not tentativa.isalpha():
+            print("⚠️ Por favor, chute apenas uma letra válida!\n")
+            continue
+
+        # Processamento da Tentativa
+        if tentativa in letras_certas or tentativa in letras_erradas:
+            print(f"🌀 Você já tentou a letra '{tentativa}'. Tente outra.\n")
+        elif tentativa in palavra_secreta:
+            print(f"✨ Boa! A letra '{tentativa}' está na palavra.\n")
+            letras_certas.append(tentativa)
+        else:
+            print(f"💀 A letra '{tentativa}' não está na palavra. O Fantasma avança!\n")
+            letras_erradas.append(tentativa)
+            erros += 1
+
+        print("\n" + "-" * 30 + "\n")
+
+    # Derrota
+    exibir_forca(erros)
+    print(f"👻 FIM DE JOGO! O Fantasma te pegou!")
+    print(f"A palavra secreta era: *{palavra_secreta}*.")
+
+if _name_ == "_main_":
+    jogar_forca()
