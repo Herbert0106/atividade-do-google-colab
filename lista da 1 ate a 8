@@ -1,0 +1,103 @@
+Atividade 1: 
+numeros = []
+
+for i in range(5):
+    n = int(input(f"Digite o {i+1}º número inteiro: "))
+    numeros.append(n)
+
+print("Lista digitada:", numeros)
+
+Atividade 2 
+lista = []
+
+for i in range(5):
+    n = int(input(f"Digite o {i+1}º número (positivo ou negativo): "))
+    lista.append(n)
+
+# Aplicando o módulo (valor absoluto)
+lista_modulo = [abs(x) for x in lista]
+
+print("Lista com valores absolutos:", lista_modulo)
+
+Atividade 3 
+numeros = [10, -3, 7, -1, 5, -9, 8]
+numeros = [n for n in numeros if n >= 0]
+print(numeros)
+
+Atividade 4 
+notas = []
+while True:
+    n = float(input("Digite uma nota (ou número negativo para sair): "))
+    if n < 0:
+        break
+    notas.append(n)
+
+if notas:
+    media = sum(notas) / len(notas)
+    print(f"Média das notas: {media:.2f}")
+else:
+    print("Nenhuma nota foi digitada.")
+
+Atividade 5 
+pares = []
+impares = []
+
+while True:
+    n = int(input("Digite um número positivo (ou negativo para sair): "))
+    if n < 0:
+        break
+    if n % 2 == 0:
+        pares.append(n)
+    else:
+        impares.append(n)
+
+total = len(pares) + len(impares)
+if total > 0:
+    porc_pares = (len(pares) / total) * 100
+    porc_impares = (len(impares) / total) * 100
+    print(f"Porcentagem de pares: {porc_pares:.1f}%")
+    print(f"Porcentagem de ímpares: {porc_impares:.1f}%")
+else:
+    print("Nenhum número válido foi digitado.")
+
+Atividade 6 
+numeros = set()
+
+while True:
+    n = int(input("Digite um número positivo (ou negativo para sair): "))
+    if n < 0:
+        break
+    numeros.add(n)
+
+print("Números sem repetição:", numeros)
+
+Atividade 7
+pessoas = []
+
+for i in range(5):
+    altura = float(input(f"Altura da pessoa {i+1}: "))
+    peso = float(input(f"Peso da pessoa {i+1}: "))
+    pessoas.append((altura, peso))
+
+iguais = len(pessoas) != len(set(pessoas))
+
+if iguais:
+    print("Pelo menos duas pessoas têm a mesma altura e o mesmo peso.")
+else:
+    print("Ninguém tem altura e peso iguais.")
+ 
+Atividade 8
+pessoas = {}
+
+while True:
+    nome = input("Nome (ou deixe vazio para encerrar): ")
+    if nome == "":
+        break
+    idade = int(input("Idade: "))
+    pessoas[nome] = idade
+
+if pessoas:
+    mais_velho = max(pessoas, key=pessoas.get)
+    print(f"A pessoa mais velha é {mais_velho} ({pessoas[mais_velho]} anos).")
+else:
+    print("Nenhum nome foi informado.")
